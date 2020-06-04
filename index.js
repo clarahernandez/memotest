@@ -9,8 +9,8 @@ document.querySelector('#boton-reiniciar').onclick = reiniciarJuego;
 
 function empezarJuego() {
     actualizarEstado('¡Encuentra los pares!');
-    ocultarBotonEmpezar();
-    mostrarBotonReiniciar();
+    mostrarOcultarElemento('boton-empezar'); //Oculto
+    mostrarOcultarElemento('boton-reiniciar'); //Muestro
     distribuirColores();
     manejarRonda();
     desbloquearCuadros();
@@ -84,9 +84,13 @@ function distribuirColores() {
 
 function reiniciarJuego() {
     bloquearCuadros();
-    actualizarRonda('0');
+    mostrarOcultarElemento('boton-reiniciar'); //Oculto
+    mostrarOcultarElemento('boton-empezar'); //Muestro
+    actualizarEstado(
+        'El juego consiste en encontrar los pares de colores. Para jugar haz click en empezar.'
+    );
+    actualizarRonda('-');
     reiniciarCuadros();
-    empezarJuego();
     ronda = 0;
     parejasDisponibles = COLORES.length;
     cuadrosEnUso = [];
@@ -133,11 +137,8 @@ function desbloquearCuadro($cuadro) {
     $cuadro.onclick = manejarInputUsuario;
 }
 
-function ocultarBotonEmpezar() {
-    document.querySelector(`#boton-empezar`).classList.add('oculto');
-}
-function mostrarBotonReiniciar() {
-    document.querySelector(`#boton-reiniciar`).classList.remove('oculto');
+function mostrarOcultarElemento(id) {
+    document.querySelector(`#${id}`).classList.toggle('oculto');
 }
 
 function actualizarEstado(texto) {
