@@ -2,11 +2,8 @@
     padding: 5px;
 }
 
-h1 {
-    text-align: center;
-}
-
 body {
+    text-align: center;
     min-height: 100vh;
 }
 
