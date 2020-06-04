@@ -11,8 +11,8 @@ body {
 }
 
 .cuadro {
-    border: 1px solid black;
     height: 110px;
+    border: 1px solid black;
 }
 
 .dado-vuelta {

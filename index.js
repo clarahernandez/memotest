@@ -9,15 +9,14 @@ document.querySelector('#boton-reiniciar').onclick = reiniciarJuego;
 
 function empezarJuego() {
     actualizarEstado('¡Encuentra los pares!');
-    ocultarBotonEmpezar();
-    mostrarBotonReiniciar();
+    mostrarOcultarElemento('boton-empezar'); //Oculto
+    mostrarOcultarElemento('boton-reiniciar'); //Muestro
     distribuirColores();
     manejarRonda();
     desbloquearInputUsuario();
 }
 
 function manejarRonda() {
-    console.log(cuadrosEnUso);
     if (cuadrosEnUso.length === 2) {
         ronda++;
         actualizarRonda(ronda);
@@ -31,7 +30,7 @@ function manejarRonda() {
                     desbloquearCuadro($cuadro);
                     console.log($cuadro);
                     mostrarOcultarCuadro($cuadro);
-                }, 500);
+                }, 300);
             });
 
             cuadrosEnUso = [];
@@ -85,8 +84,8 @@ function distribuirColores() {
 
 function reiniciarJuego() {
     bloquearInputUsuario();
-    ocultarBotonReiniciar();
-    mostrarBotonEmpezar();
+    mostrarOcultarElemento('boton-reiniciar'); //Oculto
+    mostrarOcultarElemento('boton-empezar'); //Muestro
     actualizarEstado(
         'El juego consiste en encontrar los pares de colores. Para jugar haz click en empezar.'
     );
@@ -96,7 +95,7 @@ function reiniciarJuego() {
     parejasDisponibles = COLORES.length;
 }
 
-//Algoritmo de Fisher-Yates Shuffle
+//Algoritmo de Fisher-Yates Shuffle para mezclar una lista
 function shuffle(array) {
     let contador = array.length;
 
@@ -138,19 +137,23 @@ function desbloquearCuadro($cuadro) {
 }
 
 function ocultarBotonEmpezar() {
-    document.querySelector('#boton-empezar').className = 'btn btn-outline-success oculto';
+    document.querySelector('#boton-empezar').classList.add('oculto');
 }
 
 function mostrarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger';
+    document.querySelector('#boton-reiniciar').classList.remove('oculto');
 }
 
 function mostrarBotonEmpezar() {
-    document.querySelector('#boton-empezar').className = 'btn btn-outline-success';
+    document.querySelector('#boton-empezar').classList.remove('oculto');
 }
 
 function ocultarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger oculto';
+    document.querySelector('#boton-reiniciar').classList.add('oculto');
+}
+
+function mostrarOcultarElemento(id) {
+    document.querySelector(`#${id}`).classList.toggle('oculto');
 }
 
 function actualizarEstado(texto) {
@@ -160,7 +163,7 @@ function actualizarEstado(texto) {
 
 function bloquearInputUsuario() {
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.onclick = function () {}; //Le digo que cuando haga click no pase nada.
+        $cuadro.onclick = function () {};
     });
 }
 
