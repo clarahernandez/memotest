@@ -13,7 +13,7 @@ function empezarJuego() {
     mostrarOcultarElemento('boton-reiniciar'); //Muestro
     distribuirColores();
     manejarRonda();
-    desbloquearInputUsuario();
+    desbloquearCuadros();
 }
 
 function manejarRonda() {
@@ -42,8 +42,8 @@ function manejarRonda() {
 }
 
 function ganar() {
-    bloquearInputUsuario();
-    actualizarEstado(`¡Ganaste! Para volver a jugar haz click en reiniciar.`);
+    bloquearCuadros();
+    actualizarEstado(`¡Ganaste!`);
 }
 
 function manejarInputUsuario(e) {
@@ -83,7 +83,7 @@ function distribuirColores() {
 }
 
 function reiniciarJuego() {
-    bloquearInputUsuario();
+    bloquearCuadros();
     mostrarOcultarElemento('boton-reiniciar'); //Oculto
     mostrarOcultarElemento('boton-empezar'); //Muestro
     actualizarEstado(
@@ -136,22 +136,6 @@ function desbloquearCuadro($cuadro) {
     $cuadro.onclick = manejarInputUsuario;
 }
 
-function ocultarBotonEmpezar() {
-    document.querySelector('#boton-empezar').classList.add('oculto');
-}
-
-function mostrarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').classList.remove('oculto');
-}
-
-function mostrarBotonEmpezar() {
-    document.querySelector('#boton-empezar').classList.remove('oculto');
-}
-
-function ocultarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').classList.add('oculto');
-}
-
 function mostrarOcultarElemento(id) {
     document.querySelector(`#${id}`).classList.toggle('oculto');
 }
@@ -161,14 +145,14 @@ function actualizarEstado(texto) {
     $estado.textContent = texto;
 }
 
-function bloquearInputUsuario() {
+function bloquearCuadros() {
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.onclick = function () {};
+        bloquearCuadro($cuadro);
     });
 }
 
-function desbloquearInputUsuario() {
+function desbloquearCuadros() {
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.onclick = manejarInputUsuario;
+        desbloquearCuadro($cuadro);
     });
 }
