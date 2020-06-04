@@ -1,6 +1,8 @@
 const COLORES = ['rojo', 'verde', 'amarillo', 'azul', 'gris', 'violeta'];
 const LISTA_COLORES = duplicarColores();
-let turnos = 0;
+let ronda = 0;
+let cuadrosEnUso = [];
+let parejasDisponibles = COLORES.length;
 
 document.querySelector('#boton-empezar').onclick = empezarJuego;
 document.querySelector('#boton-reiniciar').onclick = reiniciarJuego;
@@ -11,20 +13,51 @@ function empezarJuego() {
     mostrarBotonReiniciar();
     distribuirColores();
     manejarRonda();
-}
-
-function manejarRonda() {
     desbloquearInputUsuario();
 }
 
-function bloquearCuadro($cuadro) {
-    $cuadro.onclick = function () {};
+function manejarRonda() {
+    console.log(cuadrosEnUso);
+    if (cuadrosEnUso.length === 2) {
+        ronda++;
+        actualizarRonda(ronda);
+        if (cuadrosEnUso[0].className === cuadrosEnUso[1].className) {
+            marcarEncontrados(cuadrosEnUso);
+            parejasDisponibles--;
+            cuadrosEnUso = [];
+        } else {
+            cuadrosEnUso.forEach(function ($cuadro) {
+                setTimeout(function () {
+                    desbloquearCuadro($cuadro);
+                    console.log($cuadro);
+                    mostrarOcultarCuadro($cuadro);
+                }, 500);
+            });
+
+            cuadrosEnUso = [];
+        }
+    }
+    if (!parejasDisponibles) {
+        ganar();
+    }
+}
+
+function ganar() {
+    bloquearInputUsuario();
+    actualizarEstado(`¡Ganaste! Para volver a jugar haz click en reiniciar.`);
 }
 
 function manejarInputUsuario(e) {
-    const $cuadro1 = e.target;
-    bloquearCuadro($cuadro1);
-    mostrarOcultarCuadro($cuadro1);
+    let $cuadroAux = e.target;
+    console.log($cuadroAux);
+    bloquearCuadro($cuadroAux);
+    mostrarOcultarCuadro($cuadroAux);
+    cuadrosEnUso.push($cuadroAux);
+    manejarRonda();
+}
+
+function actualizarRonda(texto) {
+    document.querySelector('#ronda').textContent = `Ronda: ${texto}`;
 }
 
 function mostrarOcultarCuadro($cuadro) {
@@ -50,51 +83,20 @@ function distribuirColores() {
     });
 }
 
-function ocultarBotonEmpezar() {
-    document.querySelector('#boton-empezar').className = 'btn btn-outline-success oculto';
-}
-
-function mostrarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger';
-}
-
-function mostrarBotonEmpezar() {
-    document.querySelector('#boton-empezar').className = 'btn btn-outline-success';
-}
-
-function ocultarBotonReiniciar() {
-    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger oculto';
-}
-
 function reiniciarJuego() {
     bloquearInputUsuario();
     ocultarBotonReiniciar();
     mostrarBotonEmpezar();
     actualizarEstado(
-        'El juego consiste en encontrar los pares de colores. Para jugar dale a empezar.'
+        'El juego consiste en encontrar los pares de colores. Para jugar haz click en empezar.'
     );
+    actualizarRonda('-');
     reiniciarCuadros();
-    turnos = 0;
+    ronda = 0;
+    parejasDisponibles = COLORES.length;
 }
 
-function actualizarEstado(texto) {
-    const $estado = document.querySelector('#estado');
-    $estado.textContent = texto;
-}
-
-function bloquearInputUsuario() {
-    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.onclick = function () {}; //Le digo que cuando haga click no pase nada.
-    });
-}
-
-function desbloquearInputUsuario() {
-    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.onclick = manejarInputUsuario;
-    });
-}
-
-//Fisher-Yates Shuffle algorithm.
+//Algoritmo de Fisher-Yates Shuffle
 function shuffle(array) {
     let contador = array.length;
 
@@ -113,9 +115,57 @@ function shuffle(array) {
 
 function reiniciarCuadros() {
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        for (let i = 0; i < COLORES.length; i++) {
-            $cuadro.classList.remove(`${COLORES[i]}`);
-        }
-        $cuadro.classList.remove('dado-vuelta');
+        reiniciarCuadro($cuadro);
+    });
+}
+
+function reiniciarCuadro($cuadro) {
+    $cuadro.className = 'col-sm-4 cuadro';
+}
+
+function marcarEncontrados() {
+    cuadrosEnUso.forEach(function ($cuadro) {
+        reiniciarCuadro($cuadro);
+        $cuadro.classList.add('exito');
+    });
+}
+
+function bloquearCuadro($cuadro) {
+    $cuadro.onclick = function () {};
+}
+function desbloquearCuadro($cuadro) {
+    $cuadro.onclick = manejarInputUsuario;
+}
+
+function ocultarBotonEmpezar() {
+    document.querySelector('#boton-empezar').className = 'btn btn-outline-success oculto';
+}
+
+function mostrarBotonReiniciar() {
+    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger';
+}
+
+function mostrarBotonEmpezar() {
+    document.querySelector('#boton-empezar').className = 'btn btn-outline-success';
+}
+
+function ocultarBotonReiniciar() {
+    document.querySelector('#boton-reiniciar').className = 'btn btn-outline-danger oculto';
+}
+
+function actualizarEstado(texto) {
+    const $estado = document.querySelector('#estado');
+    $estado.textContent = texto;
+}
+
+function bloquearInputUsuario() {
+    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
+        $cuadro.onclick = function () {}; //Le digo que cuando haga click no pase nada.
+    });
+}
+
+function desbloquearInputUsuario() {
+    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
+        $cuadro.onclick = manejarInputUsuario;
     });
 }
