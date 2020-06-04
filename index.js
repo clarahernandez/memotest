@@ -15,7 +15,6 @@ function empezarJuego() {
 
 function manejarRonda() {
     desbloquearInputUsuario();
-    actualizarEstado();
 }
 
 function bloquearCuadro($cuadro) {
