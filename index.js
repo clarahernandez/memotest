@@ -93,6 +93,7 @@ function reiniciarJuego() {
     reiniciarCuadros();
     ronda = 0;
     parejasDisponibles = COLORES.length;
+    cuadrosEnUso = [];
 }
 
 //Algoritmo de Fisher-Yates Shuffle para mezclar una lista
