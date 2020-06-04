@@ -16,6 +16,16 @@ function empezarJuego() {
     desbloquearCuadros();
 }
 
+function reiniciarJuego() {
+    bloquearCuadros();
+    reiniciarCuadros();
+    ronda = 0;
+    parejasDisponibles = COLORES.length;
+    cuadrosEnUso = [];
+    actualizarRonda(ronda);
+    empezarJuego();
+}
+
 function manejarRonda() {
     if (cuadrosEnUso.length === 2) {
         ronda++;
@@ -48,19 +58,10 @@ function ganar() {
 
 function manejarInputUsuario(e) {
     let $cuadroAux = e.target;
-    console.log($cuadroAux);
     bloquearCuadro($cuadroAux);
     mostrarOcultarCuadro($cuadroAux);
     cuadrosEnUso.push($cuadroAux);
     manejarRonda();
-}
-
-function actualizarRonda(texto) {
-    document.querySelector('#ronda').textContent = `Ronda: ${texto}`;
-}
-
-function mostrarOcultarCuadro($cuadro) {
-    $cuadro.classList.toggle('dado-vuelta');
 }
 
 function duplicarColores() {
@@ -80,16 +81,6 @@ function distribuirColores() {
         $cuadro.classList.add('dado-vuelta', `${listaAux[i]}`);
         i++;
     });
-}
-
-function reiniciarJuego() {
-    bloquearCuadros();
-    reiniciarCuadros();
-    ronda = 0;
-    parejasDisponibles = COLORES.length;
-    cuadrosEnUso = [];
-    actualizarRonda(ronda);
-    empezarJuego();
 }
 
 //Algoritmo de Fisher-Yates Shuffle para mezclar una lista
@@ -117,6 +108,14 @@ function reiniciarCuadros() {
 
 function reiniciarCuadro($cuadro) {
     $cuadro.className = 'col-sm-4 cuadro';
+}
+
+function actualizarRonda(texto) {
+    document.querySelector('#ronda').textContent = `Ronda: ${texto}`;
+}
+
+function mostrarOcultarCuadro($cuadro) {
+    $cuadro.classList.toggle('dado-vuelta');
 }
 
 function marcarEncontrados() {
