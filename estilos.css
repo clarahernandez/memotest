@@ -1,14 +1,26 @@
-#encabezado {
-    height: 20vh;
+#tablero {
+    padding: 5px;
 }
 
 h1 {
     text-align: center;
 }
 
+body {
+    min-height: 100vh;
+}
+
 .cuadro {
     border: 1px solid black;
-    height: 20vh;
+    height: 110px;
+}
+
+.dado-vuelta {
+    background-image: url('https://1.bp.blogspot.com/-wBzCym9NR88/VEJkekaMdjI/AAAAAAAAJeY/yk55XiTDDog/s1600/reves.jpg');
+}
+
+.exito {
+    background-color: black;
 }
 
 .rojo {
@@ -26,8 +38,8 @@ h1 {
     background-color: blue;
 }
 
-.negro {
-    background-color: black;
+.gris {
+    background-color: grey;
 }
 
 .violeta {
