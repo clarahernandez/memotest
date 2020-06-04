@@ -8,50 +8,42 @@
         <link rel="stylesheet" href="estilos.css" />
     </head>
     <body>
-        <div class="container-fluid h-100" id="tablero">
-            <div class="row fila-juego">
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-            </div>
-            <div class="row fila-juego">
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-            </div>
-            <div class="row fila-juego">
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
+        <div class="container">
+            <div id="encabezado">
+                <h1>MemoTest</h1>
+                <div class="row row-cols-3">
+                    <div class="col-sm-8 alert alert-primary" id="estado" role="alert">
+                        El juego consiste en encontrar los pares de colores. </br>
+                        Para empezar dale a jugar.
+                    </div>
+                    <div class="col-sm-2 alert alert-warning" id="ronda" role="alert">Ronda: -</div>
+                    <div class="col-sm-2">
+                        <button type="button" id="boton-empezar" class="btn btn-outline-success">
+                            Empezar
+                        </button>
+                        <button
+                            type="button"
+                            id="boton-reiniciar"
+                            class="btn btn-outline-danger oculto"
+                        >
+                            Reiniciar
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="row fila-juego">
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
-                <div class="col">
-                    <div class="cuadro h-100"></div>
-                </div>
+            <div class="row" id="tablero">
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
+                <div class="col-sm-4 cuadro"></div>
             </div>
         </div>
         <script src="index.js"></script>

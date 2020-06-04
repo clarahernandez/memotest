@@ -1,7 +1,43 @@
-.cuadro {
-    border: 1px solid black;
+#encabezado {
+    height: 20vh;
 }
 
-.fila-juego {
-    height: 25vh;
+h1 {
+    text-align: center;
+}
+
+.cuadro {
+    border: 1px solid black;
+    height: 20vh;
+}
+
+.rojo {
+    background-color: red;
+}
+.verde {
+    background-color: green;
+}
+
+.amarillo {
+    background-color: yellow;
+}
+
+.azul {
+    background-color: blue;
+}
+
+.negro {
+    background-color: black;
+}
+
+.violeta {
+    background-color: violet;
+}
+
+.oculto {
+    display: none;
+}
+
+.emparejado {
+    background-color: grey;
 }
