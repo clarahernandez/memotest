@@ -1,0 +1,56 @@
+#tablero {
+    padding: 5px;
+}
+
+h1,
+#estado {
+    text-align: center;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.cuadro {
+    height: 110px;
+}
+
+.dado-vuelta {
+    background-image: url('https://1.bp.blogspot.com/-wBzCym9NR88/VEJkekaMdjI/AAAAAAAAJeY/yk55XiTDDog/s1600/reves.jpg');
+    border: 1px solid rgb(80, 79, 79);
+}
+
+.exito {
+    background-color: black;
+}
+
+.rojo {
+    background-color: red;
+}
+.verde {
+    background-color: green;
+}
+
+.amarillo {
+    background-color: yellow;
+}
+
+.azul {
+    background-color: blue;
+}
+
+.gris {
+    background-color: grey;
+}
+
+.violeta {
+    background-color: violet;
+}
+
+.oculto {
+    display: none;
+}
+
+.emparejado {
+    background-color: grey;
+}
