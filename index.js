@@ -77,7 +77,7 @@ function distribuirColores() {
     listaAux = shuffle(LISTA_COLORES);
     let i = 0;
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.classList.add(`${listaAux[i]}`, 'dado-vuelta');
+        $cuadro.classList.add('dado-vuelta', `${listaAux[i]}`);
         i++;
     });
 }
