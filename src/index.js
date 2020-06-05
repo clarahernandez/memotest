@@ -1,6 +1,5 @@
 const COLORES = ['rojo', 'verde', 'amarillo', 'azul', 'gris', 'violeta'];
 const LISTA_COLORES = duplicarColores();
-let ronda = 0;
 let ronda = 1;
 let cuadrosEnUso = [];
 let parejasDisponibles = COLORES.length;
@@ -20,7 +19,6 @@ function empezarJuego() {
 
 function reiniciarJuego() {
     reiniciarCuadros();
-    ronda = 0;
     ronda = 1;
     parejasDisponibles = COLORES.length;
     cuadrosEnUso = [];
