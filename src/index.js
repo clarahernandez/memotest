@@ -13,7 +13,6 @@ function empezarJuego() {
     ocultarBotonEmpezar();
     mostrarBotonReiniciar();
     distribuirColores();
-    manejarRonda();
     desbloquearTablero();
 }
 
