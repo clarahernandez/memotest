@@ -13,11 +13,10 @@ function empezarJuego() {
     mostrarBotonReiniciar();
     distribuirColores();
     manejarRonda();
-    desbloquearCuadros();
+    desbloquearTablero();
 }
 
 function reiniciarJuego() {
-    bloquearCuadros();
     reiniciarCuadros();
     ronda = 0;
     parejasDisponibles = COLORES.length;
@@ -37,8 +36,6 @@ function manejarRonda() {
         } else {
             cuadrosEnUso.forEach(function ($cuadro) {
                 setTimeout(function () {
-                    desbloquearCuadro($cuadro);
-                    console.log($cuadro);
                     mostrarOcultarCuadro($cuadro);
                 }, 300);
             });
@@ -52,16 +49,22 @@ function manejarRonda() {
 }
 
 function ganar() {
-    bloquearCuadros();
+    bloquearTablero();
     actualizarEstado(`¡Ganaste!`);
 }
 
 function manejarInputUsuario(e) {
-    let $cuadroAux = e.target;
-    bloquearCuadro($cuadroAux);
-    mostrarOcultarCuadro($cuadroAux);
-    cuadrosEnUso.push($cuadroAux);
-    manejarRonda();
+    const $elemento = e.target;
+    if ($elemento.classList.contains('cuadro')) {
+        //bloquearCuadro($elemento);
+        if ($elemento === cuadrosEnUso[0]) {
+            return;
+        } else {
+            mostrarOcultarCuadro($elemento);
+            cuadrosEnUso.push($elemento);
+            manejarRonda();
+        }
+    }
 }
 
 function duplicarColores() {
@@ -81,23 +84,6 @@ function distribuirColores() {
         $cuadro.classList.add('dado-vuelta', `${listaAux[i]}`);
         i++;
     });
-}
-
-//Algoritmo de Fisher-Yates Shuffle para mezclar una lista
-function shuffle(array) {
-    let contador = array.length;
-
-    while (contador > 0) {
-        let index = Math.floor(Math.random() * contador);
-        contador--;
-
-        // Intercambiamos el ultimo elemento.
-        let temp = array[contador];
-        array[contador] = array[index];
-        array[index] = temp;
-    }
-
-    return array;
 }
 
 function reiniciarCuadros() {
@@ -125,13 +111,6 @@ function marcarEncontrados() {
     });
 }
 
-function bloquearCuadro($cuadro) {
-    $cuadro.onclick = function () {};
-}
-function desbloquearCuadro($cuadro) {
-    $cuadro.onclick = manejarInputUsuario;
-}
-
 function mostrarBotonReiniciar() {
     document.querySelector(`#boton-reiniciar`).classList.remove('oculto');
 }
@@ -144,14 +123,27 @@ function actualizarEstado(texto) {
     $estado.textContent = texto;
 }
 
-function bloquearCuadros() {
-    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        bloquearCuadro($cuadro);
-    });
+function bloquearTablero() {
+    document.querySelector('#tablero').onclick = function () {};
 }
 
-function desbloquearCuadros() {
-    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        desbloquearCuadro($cuadro);
-    });
+function desbloquearTablero() {
+    document.querySelector('#tablero').onclick = manejarInputUsuario;
+}
+
+//Algoritmo de Fisher-Yates Shuffle para mezclar una lista
+function shuffle(array) {
+    let contador = array.length;
+
+    while (contador > 0) {
+        let index = Math.floor(Math.random() * contador);
+        contador--;
+
+        // Intercambiamos el ultimo elemento.
+        let temp = array[contador];
+        array[contador] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
 }
