@@ -13,7 +13,7 @@ context('Memotest', () => {
     });
 
     it('se asegura que los cuadros sean aleatorios', () => {
-        cy.get('#boton-empezar').click;
+        cy.get('#boton-empezar').click();
         cy.get('.cuadro').then((cuadros) => {
             let clasesOriginales = [];
             cuadros.each(function (i, cuadro) {
@@ -21,7 +21,7 @@ context('Memotest', () => {
             });
 
             cy.visit(URL);
-            cy.get('#boton-empezar').click;
+            cy.get('#boton-empezar').click();
 
             let clasesNuevas = [];
             cy.get('.cuadro').then((nuevosCuadros) => {
