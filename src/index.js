@@ -30,6 +30,7 @@ function manejarRonda() {
     if (cuadrosEnUso.length === 2) {
         ronda++;
         actualizarRonda(ronda);
+
         if (cuadrosEnUso[0].className === cuadrosEnUso[1].className) {
             marcarEncontrados(cuadrosEnUso);
             parejasDisponibles--;
@@ -44,6 +45,7 @@ function manejarRonda() {
             cuadrosEnUso = [];
         }
     }
+
     if (!parejasDisponibles) {
         ganar();
     }
@@ -57,8 +59,7 @@ function ganar() {
 function manejarInputUsuario(e) {
     const $elemento = e.target;
     if ($elemento.classList.contains('cuadro')) {
-        //bloquearCuadro($elemento);
-        if ($elemento === cuadrosEnUso[0]) {
+        if ($elemento === cuadrosEnUso[0] || $elemento.classList.contains('exito')) {
             return;
         } else {
             mostrarOcultarCuadro($elemento);
