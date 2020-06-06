@@ -43,10 +43,8 @@ context('Memotest', () => {
                     listaDePares = Object.values(mapaDePares);
 
                     console.log(listaDePares);
-                    cy.get(listaDePares[0][0]).click();
-                    cy.get(listaDePares[1][0]).click();
-                    cy.clock(1);
-                    cy.tick(4000);
+                    cy.get(listaDePares[4][0]).click();
+                    cy.get(listaDePares[5][0]).click();
                 });
             });
             console.log(mapaDePares);
