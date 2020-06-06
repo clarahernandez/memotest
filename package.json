@@ -1,23 +1,28 @@
 {
-  "name": "memotest",
-  "version": "1.0.0",
-  "description": "Juego Memotest para r/Argentina Programa",
-  "main": "index.html",
-  "dependencies": {
-    "bootstrap": "^4.5.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/clarahernandez/memotest.git"
-  },
-  "author": "Clara Hernandez",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/clarahernandez/memotest/issues"
-  },
-  "homepage": "https://github.com/clarahernandez/memotest#readme"
+    "name": "memotest",
+    "version": "1.0.0",
+    "description": "Juego Memotest para r/Argentina Programa",
+    "main": "index.html",
+    "dependencies": {
+        "bootstrap": "^4.5.0"
+    },
+    "devDependencies": {
+        "cypress": "^4.7.0"
+    },
+    "scripts": {
+        "start": "http-server",
+        "cypress-run": "cypress run",
+        "cypress-dev": "cypress open",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/clarahernandez/memotest.git"
+    },
+    "author": "Clara Hernandez",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/clarahernandez/memotest/issues"
+    },
+    "homepage": "https://github.com/clarahernandez/memotest#readme"
 }
