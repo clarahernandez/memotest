@@ -45,16 +45,21 @@ context('Memotest', () => {
                     console.log(listaDePares);
                     cy.get(listaDePares[0][0]).click();
                     cy.get(listaDePares[1][0]).click();
+                    cy.clock(1);
+                    cy.tick(4000);
                 });
             });
-
+            console.log(mapaDePares);
+            console.log(listaDePares);
             it('resuelve el juego', () => {
                 listaDePares.forEach((par) => {
                     cy.get(par[0]).click();
                     cy.get(par[1]).click();
                 });
 
-                const numeroTurnos = NUMERO_CUADROS / 2 + 1; //porque se testeó 1 incorrecto.
+                const numeroTurnos = NUMERO_CUADROS / 2 + 2; //porque se testeó 1 incorrecto y arranca en 1.
+                cy.get('#estado').contains('¡Ganaste!');
+                cy.get('#ronda').contains(`Ronda: ${numeroTurnos}`);
             });
         });
     });
