@@ -12,8 +12,11 @@ function empezarJuego() {
     actualizarRonda(ronda);
     ocultarBotonEmpezar();
     mostrarBotonReiniciar();
-    distribuirColores();
-    desbloquearTablero();
+    ponerFondoCuadros();
+    setTimeout(function () {
+        distribuirColores();
+        desbloquearTablero();
+    }, 200);
 }
 
 function reiniciarJuego() {
@@ -82,8 +85,14 @@ function distribuirColores() {
     listaAux = shuffle(LISTA_COLORES);
     let i = 0;
     document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
-        $cuadro.classList.add('dado-vuelta', `${listaAux[i]}`);
+        $cuadro.classList.add(`${listaAux[i]}`);
         i++;
+    });
+}
+
+function ponerFondoCuadros() {
+    document.querySelectorAll('.cuadro').forEach(function ($cuadro) {
+        $cuadro.classList.add('dado-vuelta');
     });
 }
 
