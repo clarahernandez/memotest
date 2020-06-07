@@ -16,7 +16,7 @@ function empezarJuego() {
     setTimeout(function () {
         distribuirColores();
         desbloquearTablero();
-    }, 200);
+    }, 15);
 }
 
 function reiniciarJuego() {
