@@ -17,22 +17,27 @@ context('Memotest', () => {
         });
 
         it('se asegura que los cuadros sean aleatorios', () => {
+            cy.clock();
             cy.get('#boton-empezar').click();
-            cy.get('.cuadro').then((cuadros) => {
-                let clasesOriginales = [];
-                cuadros.each(function (i, cuadro) {
-                    clasesOriginales.push(cuadro.className);
-                });
-                cy.visit(URL);
-                cy.get('#boton-empezar').click();
-                let clasesNuevas = [];
-                cy.get('.cuadro').then((nuevosCuadros) => {
-                    nuevosCuadros.each(function (i, cuadro) {
-                        clasesNuevas.push(cuadro.className);
+            cy.tick(100)
+                .get('.cuadro')
+                .then((cuadros) => {
+                    let clasesOriginales = [];
+                    cuadros.each(function (i, cuadro) {
+                        clasesOriginales.push(cuadro.className);
                     });
-                    cy.wrap(clasesOriginales).should('not.deep.equal', clasesNuevas);
+                    cy.visit(URL);
+                    cy.get('#boton-empezar').click();
+                    let clasesNuevas = [];
+                    cy.tick(200)
+                        .get('.cuadro')
+                        .then((nuevosCuadros) => {
+                            nuevosCuadros.each(function (i, cuadro) {
+                                clasesNuevas.push(cuadro.className);
+                            });
+                            cy.wrap(clasesOriginales).should('not.deep.equal', clasesNuevas);
+                        });
                 });
-            });
         });
 
         describe('resuelve el juego', () => {
